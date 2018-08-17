@@ -42,8 +42,8 @@
           <li><a href="./列表页.html">文章列表</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="./登录页.html">登录</a></li>
-          <li><a href="./注册页.html">注册</a></li>
+          <li><a href="{:url('login')}">登录</a></li>
+          <li><a href="{:url('reg')}">注册</a></li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">我 <span class="caret"></span></a>
             <ul class="dropdown-menu">
