@@ -11,7 +11,7 @@ CREATE TABLE blog_users (
 CREATE TABLE blog_categories (
 	id int not null auto_increment,
 	name varchar(64) not null default '',	
-	creared_time int not null default 0,	
+	created_time int not null default 0,	
 	user_id int not null default 0,	
 	primary key(id),
 	index(user_id)	
@@ -20,7 +20,7 @@ CREATE TABLE blog_categories (
 CREATE TABLE blog_tags (
 	id int not null auto_increment,
 	name varchar(64) not null default '',	
-	creared_time int not null default 0,	
+	created_time int not null default 0,	
 	user_id int not null default 0,	
 	primary key(id),
 	index(user_id)	
@@ -30,7 +30,7 @@ CREATE TABLE blog_articles (
 	id int not null auto_increment,
 	title varchar(128) not null default '',	
 	body text default null,
-	creared_time int not null default 0,
+	created_time int not null default 0,
 	updated_time int not null default 0,
 	category_id int not null default 0,
 	user_id  int not null default 0,
@@ -46,3 +46,5 @@ CREATE TABLE blog_article_tag_map (
 	primary key(id),
 ) ENGINE innodb CHARSET utf8;
 
+ALTER TABLE blog_articles add sub_title varchar(128) not null default '' after title;
+ALTER TABLE blog_articles add views int not null default 0 after body;
