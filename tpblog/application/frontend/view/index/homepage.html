@@ -9,21 +9,9 @@
       {/foreach}
     </div>
     <div class="col-md-3">
-      <div class="visible-md visible-lg">
-        <div class="panel panel-custom">
-          <div class="panel-heading">热门标签</div>
-          <div class="content tag-cloud">
-            {foreach $tags as $tag}
-               <a href="{./标签列表.html}">{$tag->name}</a>
-            {/foreach}
-          </div>
-        </div>
-      </div>
-
+      <div class="tag-list" data-url="{:url('ajax_tag_list')}"></div>
       <div class="category-list" data-url="{:url('ajax_category_list')}">
-        
       </div>
-
     </div>
   </div> 
 {/block}

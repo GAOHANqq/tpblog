@@ -16,6 +16,12 @@ class Article extends Controller
 	{	
 		$where = [];
 
+		$tagId = $request->get('tags',0);
+		$tag = TagModel::get($tagId);
+		if ($tag) {
+			$where['tag_id'] = $tag->id;
+		}
+
 		$categoryId = $request->get('category',0);
 		$category = CategoryModel::get($categoryId);
 		if ($category) {
@@ -24,8 +30,8 @@ class Article extends Controller
 
 		$articles  = ArticleModel::where($where)->order('id', 'desc')
 										->paginate(3);
-  //   	$tags      = TagModel::order('id','desc')
-  //   									->select();
+    	// $tags      = TagModel::order('id','desc')
+    	// 								->select();
 		 // $categorys = CategoryModel::order('id', 'desc')
 										// ->select();
 
@@ -36,6 +42,7 @@ class Article extends Controller
 
 		$this->assign('articles',$articles);
 		$this->assign('currcategory',$category);
+		$this->assign('currtag',$tag);
 		// $this->assign('tags',$tags);
 		// $this->assign('categorys',$categorys);
 
@@ -72,8 +79,7 @@ class Article extends Controller
 
 	public function tagList(Request $request)
 	{
-		$tags = TagModel::where('article_num','>',0)
-										->order('id', 'desc')
+		$tags = TagModel::order('id', 'desc')
 										->select();
 
 		$this->assign('tags',$tags);

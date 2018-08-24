@@ -29,7 +29,7 @@ class Reg extends Base
 			}
 
 			if ($postData['password'] != $postData['repassword']) {
-			$this->error('注册失败,两次密码不一致');
+				$this->error('注册失败,两次密码不一致');
 			}
 				//验证用户名是否重复
 			$user = new UserModel;

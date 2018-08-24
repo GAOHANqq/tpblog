@@ -16,7 +16,8 @@
         </div>
       </div>
     </div>
-
+    
+  <div class="tag-list" data-url="{:url('ajax_tag_list')}"></div>
 	<div class="category-list" data-url="{:url('ajax_category_list')}"></div>
 	
   </div>
@@ -26,6 +27,10 @@
       <li class="active">文章列表</li>
     {if $currcategory}
       <li class="active">{$currcategory->name}</li>
+    {/if}
+    
+    {if $currtag}
+      <li class="active">{$currtag->name}</li>
     {/if}
     </ol>
       <div class="post-list list-group">

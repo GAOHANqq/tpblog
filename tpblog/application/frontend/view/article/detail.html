@@ -45,17 +45,22 @@
             著作权归作者所有</span>
         </div>
       </section>
+
       <section class="post-content">
         <b>分类</b>&nbsp;&nbsp;&nbsp;
         <a href="{:url('article_list', 'category='.$article->category->id)}"><span class="badge blue">{$article->category->name}</span></a>
       </section>
+
       <br>
+
       <section class="post-content"> 
         <b>标签</b>&nbsp;&nbsp;&nbsp;
 				{foreach $article->tags as $tag } 
-    			<a href="./标签列表.html"><span class="badge blue">{$tag->name}</span></a>&nbsp;&nbsp;
+    			<a href="{:url('article_list', 'tag='.$tag->id)}">
+          <span class="badge blue">{$tag->name}</span></a>&nbsp;&nbsp;
 				{/foreach}
       </section>
+
     </section>
   </div>
 </div>

@@ -16,12 +16,12 @@ class Index extends Controller
     	$articles = ArticleModel::order('id','desc')->limit(3)->select();
 
 
-    	$tags = TagModel::order('id','desc')->select();
+    	// $tags = TagModel::order('id','desc')->select();
     	// $categorys = CategoryModel::where('article_num','>',0)->order('id', 'desc')->select();
 
 
     	$this->assign('articles',$articles);
-    	$this->assign('tags',$tags);
+    	// $this->assign('tags',$tags);
     	// $this->assign('categorys',$categorys);
         return $this->fetch('index/homepage');
     }
