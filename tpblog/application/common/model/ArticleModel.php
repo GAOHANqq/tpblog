@@ -20,6 +20,11 @@ class ArticleModel extends Model
 		return $this->hasOne('CategoryModel','id','category_id');
 	}
 
+	public function user()
+	{
+		return $this->hasOne('UserModel','id','user_id');
+	}
+
 	//多对多关联
 	 public function tags()
     {
@@ -63,6 +68,8 @@ class ArticleModel extends Model
 				$article->tags()->saveAll($postData['tag']);
 			}
 
+			//更新文章数量
+			$this->updateCategoryArticleNum();
 			//提交事务
 			Db::commit();
 
@@ -80,11 +87,15 @@ class ArticleModel extends Model
 		Db::startTrans();
 		try {
 			$article = self::get($id);
+			if (!$article) {
+				return false;
+			}
 			$article->title = $postData['title'];
 			$article->sub_title = $postData['subtitle'];
 			$article->body = $postData['content'];
 			$article->category_id = $postData['category'];
 			$article->updated_time = time();
+
 			$article->save();
 			// ArticleTagMapModel::where('article_id', $id)->delete();
 			$article->tags()->detach();
@@ -97,6 +108,10 @@ class ArticleModel extends Model
 				// $articleTag->saveAll($tags);
 				$article->tags()->saveAll($postData['tag']);
 			}
+
+			//更新文章数量
+			 $this->updateCategoryArticleNum();
+
 			// 提交事务
 			Db::commit();
 			return $article;
@@ -108,5 +123,17 @@ class ArticleModel extends Model
 	}
 
     
+    public function updateCategoryArticleNum()
+    {
+    	$currentUser = $this->getCurrentUser();
+    	$categories = CategoryModel::where('user_id',$currentUser->id)->select();
+    	if (!$categories) {
+    		return true;
+    	}
+    	foreach ($categories as $key => $category) {
+    		$category->article_num = self::where('category_id',$category->id)->count();
+    		$category->save();
+    	}
+    }
 
 }

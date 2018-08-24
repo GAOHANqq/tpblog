@@ -10,3 +10,11 @@
 // +----------------------------------------------------------------------
 
 Route::get('/','frontend/Index/index')->name('homepage');
+Route::get('/articles$','frontend/Article/index')->name('article_list');
+
+Route::get('/articles/:id/show$', 'frontend/Article/detail')
+		->pattern(['id'=>'\d+'])
+		->name('admin_article_detail');
+
+Route::get('/ajax/categories$', 'frontend/Article/categoryList')->name('ajax_category_list');
+Route::get('/ajax/tags$', 'frontend/Article/tagList')->name('ajax_tag_list');

@@ -5,6 +5,7 @@ namespace app\backend\controller;
 use think\Request;
 use app\backend\controller\Base;
 use app\common\model\CategoryModel;
+use app\common\model\ArticleModel;
 
 class Category extends Base
 {	
@@ -21,7 +22,7 @@ class Category extends Base
 		$categories = CategoryModel::where('user_id',$currentUser->id)
 										->order('id','desc')
 										->select();
-		$this->assign('categories',$categories);								
+		$this->assign('categories',$categories);						
 		return $this->fetch('category/list');
 	}
 
@@ -58,10 +59,13 @@ class Category extends Base
 			if (!$title) {
 				return $this->error('编辑失败,标题不能为空');
 			}
+
 			$category->name = $title;
 			$category->save();
+
 			return $this->success('编辑成功', 'admin_category_list');
 		}
+		
 		$this->assign('category', $category);
 		return $this->fetch('category/edit');
 	}
