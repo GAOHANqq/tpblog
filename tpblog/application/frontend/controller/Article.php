@@ -50,6 +50,10 @@ class Article extends Controller
 			$this->error('文章不存在', 'homepage');
 		}
 
+		//浏览量的获取
+		$article->views += 1;
+		$article->save();
+
 		// $article->user = UserModel::get($article->user_id);
 		// $article->category = CategoryModel::get($article->category_id);
 
