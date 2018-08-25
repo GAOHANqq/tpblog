@@ -1,0 +1,45 @@
+{extend name="common/base" /}
+{block name="title"}文章列表 - {__block__}{/block}
+
+{block name="content"}
+	<div class="row">
+	  <div class="col-md-3">
+	    <div class="text-center">
+	      <section class="user-msg">
+	        <div class="header">
+	        {if $user->avatar}
+	          <img src="__UPLOAD__/{$user->avatar}" style="width:150px;height:150px;"alt="" class="img-circle img-responsive center-block">
+	          {else/}
+	          <img src="__STATIC__/images/header.jpg" alt="" class="img-circle img-responsive center-block">
+	        {/if}
+	        </div>
+	        <h5>{$user->nickname}</h5>
+	        <p><b>个人简介:</b>{$user->intro}</p>
+	      </section>
+	      <div class="list-group">
+	        博文数量 {$articles->total()}
+	      </div>
+	    </div>
+	    <div class="visible-md visible-lg">
+	      <div class="panel panel-custom">
+			<div class="category-list" data-url="{:url('ajax_category_list')}"></div>	
+	      </div>
+	    </div>
+	  </div>
+	  <div class="col-md-9">
+	    <ol class="breadcrumb">
+	      <li><a href="{:url('homepage')}">首页</a></li>
+	      <li class="active">{$user->nickname}</li>
+	    </ol>
+	    <div class="post-list list-group">
+	        {foreach $articles as $article }
+	          {include file="common/widget/list-group-item"}
+	        {/foreach}
+      </div>
+	    {$page|raw}
+	  </div>
+	</div>
+{/block}
+
+{block name="customscript"}
+{/block}

@@ -15,13 +15,6 @@ class Article extends Controller
 	public function index(Request $request)
 	{	
 		$where = [];
-
-		$tagId = $request->get('tags',0);
-		$tag = TagModel::get($tagId);
-		if ($tag) {
-			$where['tag_id'] = $tag->id;
-		}
-
 		$categoryId = $request->get('category',0);
 		$category = CategoryModel::get($categoryId);
 		if ($category) {
@@ -34,6 +27,7 @@ class Article extends Controller
     	// 								->select();
 		 // $categorys = CategoryModel::order('id', 'desc')
 										// ->select();
+		//Model中设置了一对一,多对一对应关系
 
 		//分页
 		$page = $articles->render();
@@ -42,7 +36,7 @@ class Article extends Controller
 
 		$this->assign('articles',$articles);
 		$this->assign('currcategory',$category);
-		$this->assign('currtag',$tag);
+		// $this->assign('currtag',$tag);
 		// $this->assign('tags',$tags);
 		// $this->assign('categorys',$categorys);
 
@@ -66,6 +60,48 @@ class Article extends Controller
         return $this->fetch('article/detail');
 	}
 
+	public function tagArticle(Request $request,$id)
+	{	
+		$tag = TagModel::get($id);
+		if (!$tag) {
+			$this->error('标签不存在', 'homepage');
+		}
+
+		$articleIds = ArticleTagMapModel::where('tag_id', $id)->column('article_id');
+		$articles  = ArticleModel::whereIn('id',$articleIds)->order('id', 'desc')->paginate(3);
+
+		$page = $articles->render();
+		
+		$this->assign('articles',$articles);
+		$this->assign('tag',$tag);
+		$this->assign('page',$page);
+
+
+
+		return $this->fetch('article/tag_article_list');
+
+	}
+
+	public function userInfo(Request $request,$id)
+	{
+		$user= UserModel::get($id);
+		if (!$user) {
+			return $this->error('用户不存在','homepage');
+		}
+
+		$articles  = ArticleModel::where('user_id',$user->id)->order('id', 'desc')->paginate(3);
+
+		$page = $articles->render();
+		$this->assign('page',$page);
+
+
+		$this->assign('user',$user);	
+		$this->assign('articles',$articles);	
+
+		return $this->fetch('user_info');
+
+
+	}
 	public function categoryList(Request $request)
 	{
 		$categorys = CategoryModel::where('article_num','>',0)

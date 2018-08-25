@@ -3,7 +3,7 @@
     <div class="panel-heading">热门标签</div>
     <div class="content tag-cloud">
       {foreach $tags as $tag }
-        <a href="{:url('article_list', 'tag='.$tag->id)}">{$tag->name}</a>
+        <a href="{:url('tag_article_list', 'id='.$tag->id)}">{$tag->name}</a>
       {/foreach}
     </div>
   </div>
