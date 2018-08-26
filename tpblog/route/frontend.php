@@ -30,3 +30,8 @@ Route::get('/user/:id/articles$', 'frontend/Article/userInfo')
 Route::get('/ajax/categories$', 'frontend/Article/categoryList')->name('ajax_category_list');
 Route::get('/ajax/tags$', 'frontend/Article/tagList')->name('ajax_tag_list');
 
+Route::get('/ajax/hot/articles$', 'frontend/Article/hotArticle')->name('ajax_hot_article');
+Route::get('/ajax/articles/:id/relate$', 'frontend/Article/relateArticle')
+		->pattern(['id'=>'\d+'])
+		->name('ajax_relate_article');
+

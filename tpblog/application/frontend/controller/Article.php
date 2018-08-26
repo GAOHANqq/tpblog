@@ -126,4 +126,31 @@ class Article extends Controller
 		return $this->fetch('article/ajax/tag_list');
 
 	}
+
+	//热门文章
+	public function hotArticle(Request $request)
+	{
+		$hotArticles  = ArticleModel::order('views', 'desc')->limit(5)->select();
+
+		$this->assign('hotArticles',$hotArticles);	
+
+		return $this->fetch('article/ajax/hot_article');	
+	}
+
+	public function relateArticle(Request $request,$id)
+	{
+		$article = ArticleModel::get($id);
+		if (!$article) {
+			return '文章不存在';
+		}
+				// 找到当前文章的tags
+		$tagIds = ArticleTagMapModel::where('article_id',$id)->column('tag_id');
+		// select * from blog_articles a left join blog_article_tag_map b on a.id=b.article_id where b.tag_id in (11, 10 ,8) group by a.id
+		// 去找包含这些tags中一个或多个的文章
+		$articles = ArticleTagMapModel::whereIn('tag_id', $tagIds)->column('article_id');
+		$relateArticles = ArticleModel::whereIn('id', $articles)->limit(5)->select();
+		$this->assign('relateArticles',$relateArticles);	
+
+		return $this->fetch('article/ajax/relate_article');
+	}
 }

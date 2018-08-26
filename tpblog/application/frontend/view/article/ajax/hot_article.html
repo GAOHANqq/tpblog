@@ -1,0 +1,10 @@
+<div class="visible-md visible-lg">
+  <div class="panel panel-custom">
+    <div class="panel-heading">热门文章</div>
+    <div class="list-group list-group-flush">
+      {foreach $hotArticles as $article }
+        <a href="{:url('article_detail', 'id='.$article->id)}" title="{$article->title}" class="list-group-item article-title">{$article->title}</a>
+      {/foreach}
+    </div>
+  </div>
+</div>

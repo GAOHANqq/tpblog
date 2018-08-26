@@ -5,18 +5,7 @@
 
 <div class="row">
   <div class="col-md-3">
-    <div class="visible-md visible-lg">
-      <div class="panel panel-custom">
-        <div class="panel-heading">相关文章</div>
-        <div class="list-group list-group-flush">
-          <a href="./内容页.html" class="list-group-item">如何防止服务器攻击</a>
-          <a href="./内容页.html" class="list-group-item">如何防止服务器攻击</a>
-          <a href="./内容页.html" class="list-group-item">如何防止服务器攻击</a>
-          <a href="./内容页.html" class="list-group-item">如何防止服务器攻击</a>
-          <a href="./内容页.html" class="list-group-item">如何防止服务器攻击</a>
-        </div>
-      </div>
-    </div>
+    <div class="relate-article" data-url="{:url('ajax_relate_article','id='.$article->id)}"></div>
 
     <div class="category-list" data-url="{:url('ajax_category_list')}"></div>
 
