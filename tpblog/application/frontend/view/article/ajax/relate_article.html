@@ -3,7 +3,7 @@
     <div class="panel-heading">相关文章</div>
     <div class="list-group list-group-flush">
       {foreach $relateArticles as $relatearticle }
-        <a href="{:url('article_detail', 'id='.$relatearticle->id)}" title="{$relatearticle->title}" class="list-group-item article-title">{$relatearticle->title}</a>
+        <a href="{:url('admin_article_detail', 'id='.$relatearticle->id)}" title="{$relatearticle->title}" class="list-group-item article-title">{$relatearticle->title}</a>
       {/foreach}
     </div>
   </div>
