@@ -58,3 +58,25 @@
 <br>
 
 {/block}
+{block name="customscript"}
+  <script src="__STATIC__/libs/editormd/lib/marked.min.js"></script>
+  <script src="__STATIC__/libs/editormd/lib/prettify.min.js"></script>
+  <script src="__STATIC__/libs/editormd/lib/raphael.min.js"></script>
+  <script src="__STATIC__/libs/editormd/lib/underscore.min.js"></script>
+  <script src="__STATIC__/libs/editormd/lib/sequence-diagram.min.js"></script>
+  <script src="__STATIC__/libs/editormd/lib/flowchart.min.js"></script>
+  <script src="__STATIC__/libs/editormd/lib/jquery.flowchart.min.js"></script>
+  <script src="__STATIC__/libs/editormd/editormd.min.js"></script>
+  <script>
+    $(function(){
+        editormd.markdownToHTML("editormd-view", {
+          htmlDecode      : "style,script,iframe",  // you can filter tags decode
+          emoji           : true,
+          taskList        : true,
+          tex             : true,  // 默认不解析
+          flowChart       : true,  // 默认不解析
+          sequenceDiagram : true,  // 默认不解析
+        });
+    });
+  </script>
+{/block}
