@@ -25,7 +25,9 @@
       </header>
       <hr>
       <section class="post-content">
-        {$article->body|nl2br|raw}
+        <div id='editormd-view'>
+          <textarea style="display:none;">{$article->body|nl2br|raw}</textarea>
+        </div>
       </section>
       <hr>
       <section class="post-content">
@@ -70,6 +72,8 @@
   <script>
     $(function(){
         editormd.markdownToHTML("editormd-view", {
+          width           : "100%",//宽度
+          height          : 720,
           htmlDecode      : "style,script,iframe",  // you can filter tags decode
           emoji           : true,
           taskList        : true,
