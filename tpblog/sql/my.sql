@@ -39,11 +39,37 @@ CREATE TABLE blog_articles (
 	index(user_id)	
 ) ENGINE innodb CHARSET utf8;
 
+CREATE TABLE blog_articles (
+	id int not null auto_increment,
+	title varchar(128) not null default '',
+	body text default null,
+	created_time int not null default 0,
+	updated_time int not null default 0,
+	demo_id int not null default 0,
+	user_id  int not null default 0,
+	primary key(id),
+	index(demo_id),
+	index(user_id)
+) ENGINE innodb CHARSET utf8;
+
+CREATE TABLE blog_message (
+	id int not null auto_increment,
+	title varchar(128) not null default '',	
+	body text default null,
+	created_time int not null default 0,
+	updated_time int not null default 0,
+	article_id int not null default 0,
+	user_id  int not null default 0,
+	primary key(id),
+	index(article_id),	
+	index(user_id)	
+) ENGINE innodb CHARSET utf8;
+
 CREATE TABLE blog_article_tag_map (
 	id int not null auto_increment,
 	article_id int not null default 0,	
 	tag_id int not null default 0,	
-	primary key(id),
+	primary key(id)
 ) ENGINE innodb CHARSET utf8;
 
 ALTER TABLE blog_articles add sub_title varchar(128) not null default '' after title;
